@@ -8,7 +8,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: const Color(0xFF05000A),
       body: CustomScrollView(
         slivers: [
 
@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
           SliverAppBar(
             expandedHeight: 280,
             pinned: true,
-            backgroundColor: const Color(0xFF0A0A0A),
+            backgroundColor: const Color(0xFF05000A),
             iconTheme: const IconThemeData(color: Colors.white),
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
@@ -30,6 +30,7 @@ class DetailPage extends StatelessWidget {
                       ? Image.network(
                           game.backgroundImage,
                           fit: BoxFit.cover,
+                          alignment: Alignment.topCenter,
                           errorBuilder: (_, __, ___) => Container(
                             color: Colors.grey[900],
                             child: const Icon(Icons.videogame_asset,
@@ -46,7 +47,7 @@ class DetailPage extends StatelessWidget {
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          const Color(0xFF0A0A0A).withOpacity(0.95),
+                          const Color(0xFF05000A).withOpacity(0.95),
                         ],
                         stops: const [0.4, 1.0],
                       ),
@@ -81,7 +82,7 @@ class DetailPage extends StatelessWidget {
                     _metricBadge(
                       icon: Icons.star,
                       label: game.rating.toString(),
-                      color: const Color(0xFF107C10),
+                      color: const Color(0xFF00E5FF),
                     ),
                     const SizedBox(width: 12),
                     if (game.metacritic > 0)
@@ -118,8 +119,14 @@ class DetailPage extends StatelessWidget {
                           horizontal: 14, vertical: 6),
                       decoration: BoxDecoration(
                         border: Border.all(
-                            color: const Color(0xFF107C10), width: 1),
+                            color: const Color(0xFFB200FF), width: 1),
                         borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFB200FF).withOpacity(0.3),
+                            blurRadius: 4,
+                          )
+                        ],
                       ),
                       child: Text(g.name,
                         style: const TextStyle(
@@ -243,9 +250,9 @@ class DetailPage extends StatelessWidget {
     'pc':             Colors.blueGrey,
     'playstation4':   const Color(0xFF003791),
     'playstation5':   const Color(0xFF003791),
-    'xbox-one':       const Color(0xFF107C10),
-    'xbox-series-x':  const Color(0xFF107C10),
-    'nintendo-switch':const Color(0xFFE4000F),
+    'xbox-one':       const Color(0xFF00E5FF),
+    'xbox-series-x':  const Color(0xFF00E5FF),
+    'nintendo-switch':const Color(0xFFFF007F),
     'ios':            Colors.white70,
     'android':        const Color(0xFF78C257),
   };
@@ -258,6 +265,12 @@ class DetailPage extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       border: Border.all(
         color: (colors[slug] ?? Colors.grey).withOpacity(0.4)),
+      boxShadow: [
+        BoxShadow(
+          color: (colors[slug] ?? Colors.transparent).withOpacity(0.2),
+          blurRadius: 6,
+        )
+      ],
     ),
     child: Icon(
       icons[slug] ?? Icons.devices,

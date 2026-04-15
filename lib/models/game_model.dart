@@ -10,6 +10,7 @@ class Game {
   final int playtime;
   final List<Genre> genres;
   final List<Platform> platforms;
+  final EsrbRating? esrbRating;
 
   Game({
     required this.id,
@@ -21,6 +22,7 @@ class Game {
     required this.playtime,
     required this.genres,
     required this.platforms,
+    required this.esrbRating,
   });
 
 
@@ -39,6 +41,9 @@ class Game {
       platforms: (json['platforms'] as List<dynamic>? ?? [])
         .map((p) => Platform.fromJson(p))
         .toList(),
+      esrbRating: json['esrb_rating'] != null
+    ? EsrbRating.fromJson(json['esrb_rating'])
+    : null,
     );
     
   }
@@ -60,4 +65,25 @@ class Platform {
       slug: p['slug'] ?? '',
     );
   }
+
+}
+
+class EsrbRating {
+  final int id;
+  final String name;
+  final String slug;
+
+  EsrbRating({required this.id, required this.name, required this.slug});
+
+  factory EsrbRating.fromJson(Map<String, dynamic> json) {
+    return EsrbRating(
+      id:   json['id']   ?? 0,
+      name: json['name'] ?? '',
+      slug: json['slug'] ?? '',
+    );
+  }
+
+  // true si el contenido es para mayores de edad
+  bool get isMature =>
+    slug == 'mature' || slug == 'adults-only';
 }
