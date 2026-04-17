@@ -16,4 +16,8 @@ class Genre {
       slug: json['slug'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {'id': id, 'name': name, 'slug': slug};
+  }
 }

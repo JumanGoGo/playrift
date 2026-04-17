@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MatureOverlay extends StatelessWidget {
   final double width;
@@ -17,38 +18,53 @@ class MatureOverlay extends StatelessWidget {
     Widget content = Container(
       width: width,
       height: height,
-      color: const Color(0xFF1A0010),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.red.shade700, width: 2),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            child: Text(
-              '18+',
-              style: TextStyle(
-                color: Colors.red.shade400,
-                fontWeight: FontWeight.bold,
-                fontSize: height > 60 ? 18 : 13,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF1A0A1E),
+            Color(0xFF0F0614),
+            Color(0xFF1A0A1E),
+          ],
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: height > 60 ? 14 : 8,
+                vertical: height > 60 ? 5 : 3,
               ),
-            ),
-          ),
-          if (height > 60) ...[
-            const SizedBox(height: 6),
-            Text(
-              'Contenido\npara adultos',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.red.shade300,
-                fontSize: 11,
-                height: 1.3,
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: const Color(0xFFEF4444).withAlpha(180), width: 1.5),
+                borderRadius: BorderRadius.circular(6),
               ),
+              child: Text('18+',
+                  style: GoogleFonts.inter(
+                    color: const Color(0xFFEF4444),
+                    fontWeight: FontWeight.w800,
+                    fontSize: height > 60 ? 16 : 10,
+                    letterSpacing: 1,
+                  )),
             ),
-          ]
-        ],
+            if (height > 80) ...[
+              const SizedBox(height: 6),
+              Text('CONTENIDO\nRESTRINGIDO',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.inter(
+                    color: const Color(0xFF64748B),
+                    fontSize: 8,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.5,
+                    height: 1.4,
+                  )),
+            ],
+          ],
+        ),
       ),
     );
 
